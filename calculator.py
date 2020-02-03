@@ -4,6 +4,7 @@ from decimal import *
 root = Tk()
 root.iconbitmap('icon.ico')
 root.title('Калькулятор')
+root.resizable(0, 0)
 
 buttons = (('7', '8', '9', '/', '4'),
            ('4', '5', '6', '*', '4'),

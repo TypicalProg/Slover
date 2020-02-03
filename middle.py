@@ -2,10 +2,11 @@ from tkinter import *
 import numpy as np
 
 root = Tk()
-root.iconbitmap('icon.ico')
 
 # Параметры окна
+root.iconbitmap('icon.ico')
 root.title("Вычисление среднего арифметического значения")
+root.resizable(0, 0)
 
 # Содержимое окна
 def mid(event):

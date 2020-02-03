@@ -4,6 +4,7 @@ import numpy as np
 
 root = Tk()
 root.iconbitmap('icon.ico')
+root.resizable(0, 0)
 
 # Параметры окна
 root.title("Вычисление гипотенузы")

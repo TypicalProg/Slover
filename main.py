@@ -286,6 +286,7 @@ def dk(event):
 root = Tk()
 root.title("Главное меню")
 root.iconbitmap('icon.ico')
+root.resizable(0, 0)
 
 # Код
 btn1 = Button(root, text='Ср. арифмитическое')

@@ -50,6 +50,8 @@ def gcd_lcm(a,b):
     return g, l
  
 win = Tk()
+win.resizable(0, 0)
+
 win.iconbitmap('icon.ico')
 win.title('НОД, НОК и разложение на простые числа')
 lab_n1 = Label(text="Число 1")

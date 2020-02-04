@@ -1,2 +1,2 @@
 # project_npk2020
-# using package : math, tkinter, numpy
+# using package : math, tkinter, numpy, sys, decimal

@@ -322,6 +322,7 @@ root.iconbitmap('icon.ico')
 root.resizable(0, 0)
 
 # Код
+lbl = Label(root, text='Slover')
 btn1 = Button(root, text='Среднее\n'
 						'арифмитическое', width=20)
 btn2 = Button(root, text='Корень \nлинейного уравнения', width=20)

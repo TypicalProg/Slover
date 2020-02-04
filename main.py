@@ -9,10 +9,10 @@ from decimal import *
 # Функции
 def mid(event):
 	root = Tk()
-	root.iconbitmap('icon.ico')
 
 	# Параметры окна
 	root.title("Вычисление среднего арифметического значения")
+	root.resizable(0, 0)
 
 	# Содержимое окна
 	def mid(event):
@@ -33,54 +33,56 @@ def mid(event):
 
 
 	lbl1 = Label(root, width=30, font=30)
+	lbl2 = Label(root, text='Введите числа через пробел:', width=30, font=30)
 	btn1 = Button(root, text='Вычислить', width=30, font=30)
 	ent1 = Entry(root, width=30, font=30)
 
-	ent1.grid(row=0, column=0)
-	lbl1.grid(row=1, column=0)
-	btn1.grid(row=2, column=0)
+	lbl2.grid(row=0, column=0)
+	ent1.grid(row=1, column=0)
+	lbl1.grid(row=2, column=0)
+	btn1.grid(row=3, column=0)
 
 	btn1.bind("<Button-1>", mid)
 
 	root.mainloop()
 
 
-def fact(event):
+def line_sqr(event):
 	print("--В разработке--")
 
 
 def gip(event):
 	root = Tk()
-	root.iconbitmap('icon.ico')
+	root.resizable(0, 0)
 
 	# Параметры окна
 	root.title("Вычисление гипотенузы")
 
-	# Содержимое окна
 	def mid(event):
-		num = ent1.get()
-		num_arr = num.split()
-		num_arrInt = []
-		num_len = len(num_arr)
+		num1 = ent1.get()
+		num2 = ent2.get()
+		num1 = float(num1)
+		num2 = float(num2)
 
-		for i in range(num_len):
-			t = int(num_arr[i])
-			num_arrInt.append(t**2)
+		sum1 = num1 ** 2 + num2 ** 2
 
-		arr_sum = np.sum(num_arrInt)
-		fact = math.sqrt(arr_sum)
+		fact = math.sqrt(sum1)
 		fact = round(fact, 2)
 
 		lbl1['text'] = fact
 
 
-	lbl1 = Label(root, width=30, font=30)
+	lbl1 = Label(root, width=15, font=30)
+	lbl2 = Label(root, font=30, text='Введите длину катетов:')
 	btn1 = Button(root, text='Вычислить', width=30, font=30)
-	ent1 = Entry(root, width=30, font=30)
+	ent1 = Entry(root, width=15, font=30)
+	ent2 = Entry(root, width=15, font=30)
 
-	ent1.grid(row=0, column=0)
-	lbl1.grid(row=1, column=0)
-	btn1.grid(row=2, column=0)
+	lbl2.grid(row=0, column=0)
+	ent1.grid(row=1, column=0)
+	ent2.grid(row=2, column=0)
+	lbl1.grid(row=3, column=0)
+	btn1.grid(row=4, column=0)
 
 	btn1.bind("<Button-1>", mid)
 
@@ -89,7 +91,6 @@ def gip(event):
 	
 def calc(event):
 	root = Tk() 
-	root.iconbitmap('icon.ico')
 	root.title("Калькулятор")
 	root.resizable(0, 0)
 
@@ -176,7 +177,6 @@ def calc(event):
 
 def sqr(event):
 	root = Tk()
-	root.iconbitmap('icon.ico')
 	root.resizable(0, 0)
 
 	# Параметры окна
@@ -208,17 +208,19 @@ def sqr(event):
 
 	lbl1 = Label(root, width=15, font=30)
 	lbl2 = Label(root, width=15, font=30)
+	lbl3 = Label(root, width=20, font=30, text='Введите множители:')
 	btn1 = Button(root, text='Вычислить', width=15, font=30)
 	ent1 = Entry(root, width=15, font=30)
 	ent2 = Entry(root, width=15, font=30)
 	ent3 = Entry(root, width=15, font=30)
 
-	ent1.grid(row=0, column=0)
-	ent2.grid(row=1, column=0)
-	ent3.grid(row=2, column=0)
-	lbl1.grid(row=3, column=0)
-	lbl2.grid(row=4, column=0)
-	btn1.grid(row=5, column=0)
+	lbl3.grid(row=0, column=0)
+	ent1.grid(row=1, column=0)
+	ent2.grid(row=2, column=0)
+	ent3.grid(row=3, column=0)
+	lbl1.grid(row=4, column=0)
+	lbl2.grid(row=5, column=0)
+	btn1.grid(row=6, column=0)
 
 	btn1.bind("<Button-1>", mid)
 
@@ -276,7 +278,7 @@ def dk(event):
 	    return g, l
 	 
 	root1 = Tk()
-	root1.iconbitmap('icon.ico')
+	root.resizable(0, 0)
 	root1.title('НОД, НОК и разложение на простые числа')
 	lab_n1 = Label(root1, text="Число 1")
 	lab_n1.grid(row=2,column=0)
@@ -315,36 +317,61 @@ def dk(event):
 	root1.mainloop()
 
 
+def new_win():
+	root = Tk()
+	root.title("О программе")
+	root.resizable(0, 0)
+
+	lbl1 = Label(root, text='© Michurin Andrey 2020\n'
+		'По всем вопросам писать на\n M14ur1nAK@yandex.ru',
+		 fg='blue', bg='white')
+	lbl1.grid(row=0, column=0)
+
+	root.mainloop()
+
 # Параметры экрана
 root = Tk()
 root.title("Главное меню")
-root.iconbitmap('icon.ico')
 root.resizable(0, 0)
 
 # Код
-lbl = Label(root, text='Slover')
+main_menu = Menu(root)
+root.configure(menu=main_menu)
+
+first_item = Menu(main_menu, tearoff=0)
+main_menu.add_cascade(label="Инфо", menu=first_item)
+first_item.add_command(label="О программе", command=new_win)
+
+
+lbl = Label(root, text='Slover',width=27 , font=30, fg='blue', bg='white')
+
 btn1 = Button(root, text='Среднее\n'
-						'арифмитическое', width=20)
-btn2 = Button(root, text='Корень \nлинейного уравнения', width=20)
-btn3 = Button(root, text='Гипотенуза', width=20)
-btn4 = Button(root, text='Калькулятор', width=20)
-btn5 = Button(root, text='\n--В разработке--\n', width=20)
+						'арифмитическое', width=20, fg='blue', bg='white')
+btn2 = Button(root, text='Корень \nлинейного уравнения', width=20, fg='blue', bg='white')
+
+btn3 = Button(root, text='Гипотенуза', width=20, fg='blue', bg='white')
+
+btn4 = Button(root, text='Калькулятор', width=20, fg='blue', bg='white')
+
+btn5 = Button(root, text='\n--В разработке--\n', width=20, fg='blue', bg='white')
+
 btn6 = Button(root, text='НОД, НОК и \n'
 						'разложение \n'
-						'на простые числа', width=20)
+						'на простые числа', width=20, fg='blue', bg='white')
 
 btn1.bind("<Button-1>", mid)
 btn2.bind("<Button-1>", sqr)
 btn3.bind("<Button-1>", gip)
 btn4.bind("<Button-1>", calc)
-btn5.bind("<Button-1>", fact)
+btn5.bind("<Button-1>", line_sqr)
 btn6.bind("<Button-1>", dk)
 
-btn1.grid(row= 0, column=0)
-btn2.grid(row=0, column=1)
-btn3.grid(row=1, column=0)
-btn4.grid(row=1, column=1)
-btn5.grid(row=2, column=0)
-btn6.grid(row=2, column=1)
+lbl.grid(row=0, columnspan=2)
+btn1.grid(row= 1, column=0)
+btn2.grid(row=1, column=1)
+btn3.grid(row=2, column=0)
+btn4.grid(row=2, column=1)
+btn5.grid(row=3, column=0)
+btn6.grid(row=3, column=1)
 
 root.mainloop()

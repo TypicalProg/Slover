@@ -1,6 +1,5 @@
 from tkinter import *
 import math
-import numpy as np
 
 root = Tk()
 root.iconbitmap('icon.ico')
@@ -9,31 +8,31 @@ root.resizable(0, 0)
 # Параметры окна
 root.title("Вычисление гипотенузы")
 
-# Содержимое окна
 def mid(event):
-	num = ent1.get()
-	num_arr = num.split()
-	num_arrInt = []
-	num_len = len(num_arr)
+	num1 = ent1.get()
+	num2 = ent2.get()
+	num1 = float(num1)
+	num2 = float(num2)
 
-	for i in range(num_len):
-		t = int(num_arr[i])
-		num_arrInt.append(t**2)
+	sum1 = num1 ** 2 + num2 ** 2
 
-	arr_sum = np.sum(num_arrInt)
-	fact = math.sqrt(arr_sum)
+	fact = math.sqrt(sum1)
 	fact = round(fact, 2)
 
 	lbl1['text'] = fact
 
 
-lbl1 = Label(root, width=30, font=30)
+lbl1 = Label(root, width=15, font=30)
+lbl2 = Label(root, font=30, text='Введите длину катетов:')
 btn1 = Button(root, text='Вычислить', width=30, font=30)
-ent1 = Entry(root, width=30, font=30)
+ent1 = Entry(root, width=15, font=30)
+ent2 = Entry(root, width=15, font=30)
 
-ent1.grid(row=0, column=0)
-lbl1.grid(row=1, column=0)
-btn1.grid(row=2, column=0)
+lbl2.grid(row=0, column=0)
+ent1.grid(row=1, column=0)
+ent2.grid(row=2, column=0)
+lbl1.grid(row=3, column=0)
+btn1.grid(row=4, column=0)
 
 btn1.bind("<Button-1>", mid)
 

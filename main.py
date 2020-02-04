@@ -1,11 +1,10 @@
 from tkinter import *
 import numpy as np
+from tkinter import messagebox
+from tkinter import ttk
 import math
+import sys
 from decimal import *
-
-activeStr = ' '
-stack = []
-label = 
 
 # Функции
 def mid(event):
@@ -47,32 +46,7 @@ def mid(event):
 
 
 def fact(event):
-	root = Tk()
-	root.iconbitmap('icon.ico')
-
-	# Параметры окна
-	root.title("Вычисление факториала")
-
-	# Содержимое окна
-	def mid(event):
-		num = ent1.get()
-
-		f = math.factorial(int(num))
-
-		lbl1['text'] = f
-
-
-	lbl1 = Label(root, width=30, font=30)
-	btn1 = Button(root, text='Вычислить', width=30, font=30)
-	ent1 = Entry(root, width=30, font=30)
-
-	ent1.grid(row=0, column=0)
-	lbl1.grid(row=1, column=0)
-	btn1.grid(row=2, column=0)
-
-	btn1.bind("<Button-1>", mid)
-
-	root.mainloop()
+	print("--В разработке--")
 
 
 def gip(event):
@@ -114,80 +88,88 @@ def gip(event):
 
 	
 def calc(event):
-	root = Tk()
+	root = Tk() 
 	root.iconbitmap('icon.ico')
-	root.title('Калькулятор')
+	root.title("Калькулятор")
 	root.resizable(0, 0)
 
-	buttons = (('7', '8', '9', '/', '4'),
-	           ('4', '5', '6', '*', '4'),
-	           ('1', '2', '3', '-', '4'),
-	           ('0', '.', '=', '+', '4')
-	           )
 
+	bttn_list = [
+	"7", "8", "9", "+", "*", 
+	"4", "5", "6", "-", "/",
+	"1", "2", "3",  "=", "xⁿ",
+	"0", ".", "±",  "C",
+	"Exit", "π", "sin", "cos",
+	"(", ")","n!","√2", ]
 
+	r = 1
+	c = 0
+	for i in bttn_list:
+	    rel = ""
+	    cmd=lambda x=i: calc(x)
+	    ttk.Button(root, text=i, command = cmd, width = 10).grid(row=r, column = c)
+	    c += 1
+	    if c > 4:
+	        c = 0
+	        r += 1
 
-	def calculate():
-	    global stack
-	    global label
-	    result = 0
-	    operand2 = Decimal(stack.pop())
-	    operation = stack.pop()
-	    operand1 = Decimal(stack.pop())
+	calc_entry = Entry(root, width = 33)
+	calc_entry.grid(row=0, column=0, columnspan=5)
 
-	    if operation == '+':
-	        result = operand1 + operand2
-	    if operation == '-':
-	        result = operand1 - operand2
-	    if operation == '/':
-	        result = operand1 / operand2
-	    if operation == '*':
-	        result = operand1 * operand2
-	    label.configure(text=str(result))
+	#логика калькулятора
+	def calc(key):
+	    global memory
+	    if key == "=":
+	#исключение написания слов
+	        str1 = "-+0123456789.*/)(" 
+	        if calc_entry.get()[0] not in str1:
+	            calc_entry.insert(END, "First symbol is not number!")
+	            messagebox.showerror("Error!", "You did not enter the number!")
+	#исчисления
+	        try:
+	            result = eval(calc_entry.get())
+	            calc_entry.insert(END, "=" + str(result))
+	        except:
+	            calc_entry.insert(END, "Error!")
+	            messagebox.showerror("Error!", "Check the correctness of data")
 
-	def click(text):
-	    global activeStr
-	    global stack
-	    if text == 'CE':
-	        stack.clear()
-	        activeStr = ''
-	        label.configure(text='0')
-	    elif '0' <= text <= '9':
-	        activeStr += text
-	        label.configure(text=activeStr)
-	    elif text == '.':
-	        if activeStr.find('.') == -1:
-	            activeStr += text
-	            label.configure(text=activeStr)
+	#очищение поля ввода
+	    elif key == "C":
+	        calc_entry.delete(0, END)
+
+	    elif key == "±":
+	        if "=" in calc_entry.get():
+	            calc_entry.delete(0, END)
+	        try:
+	            if calc_entry.get()[0] == "-":
+	                calc_entry.delete(0)
+	            else:
+	                calc_entry.insert(0, "-")
+	        except IndexError:
+	            pass
+	    elif key == "π":
+	        calc_entry.insert(END, math.pi)
+	    elif key == "Exit":
+	        root.after(1,root.destroy)
+	        sys.exit
+	    elif key == "xⁿ":
+	        calc_entry.insert(END, "**")
+	    elif key == "sin":
+	        calc_entry.insert(END, "=" + str(math.sin(int(calc_entry.get()))))
+	    elif key == "cos":
+	        calc_entry.insert(END, "=" + str(math.cos(int(calc_entry.get()))))
+	    elif key == "(":
+	        calc_entry.insert(END, "(")
+	    elif key == ")":
+	        calc_entry.insert(END, ")")
+	    elif key == "n!":
+	        calc_entry.insert(END, "=" + str(math.factorial(int(calc_entry.get()))))
+	    elif key == "√2":
+	        calc_entry.insert(END, "=" + str(math.sqrt(int(calc_entry.get()))))
 	    else:
-	        if len(stack) >= 2:
-	            stack.append(label['text'])
-	            calculate()
-	            stack.clear()
-	            stack.append(label['text'])
-	            activeStr = ''
-	            if text != '=':
-	                stack.append(text)
-	        else:
-	            if text != '=':
-	                stack.append(label['text'])
-	                stack.append(text)
-	                activeStr = ''
-	                label.configure(text='0')
-
-	label = Label(root, text='0', width=35)
-	label.grid(row=0, column=0, columnspan=4, sticky="nsew")
-
-	button = Button(root, text='CE', command=lambda text='CE': click(text))
-	button.grid(row=1, column=3, sticky="nsew")
-	for row in range(4):
-	    for col in range(4):
-	        button = Button(root, text=buttons[row][col],
-	                command=lambda row=row, col=col: click(buttons[row][col]))
-	        button.grid(row=row + 2, column=col, sticky="nsew")
-
-	root.grid_rowconfigure(6, weight=1)
-	root.grid_columnconfigure(4, weight=1)
+	        if "=" in calc_entry.get():
+	            calc_entry.delete(0, END)
+	        calc_entry.insert(END, key)
 
 	root.mainloop()
 
@@ -340,12 +322,15 @@ root.iconbitmap('icon.ico')
 root.resizable(0, 0)
 
 # Код
-btn1 = Button(root, text='Ср. арифмитическое')
-btn2 = Button(root, text='Корень линейного уравнения')
-btn3 = Button(root, text='Гипотенуза')
-btn4 = Button(root, text='Калькулятор')
-btn5 = Button(root, text='Факториал')
-btn6 = Button(root, text='НОД, НОК и разложение простые числа')
+btn1 = Button(root, text='Среднее\n'
+						'арифмитическое', width=20)
+btn2 = Button(root, text='Корень \nлинейного уравнения', width=20)
+btn3 = Button(root, text='Гипотенуза', width=20)
+btn4 = Button(root, text='Калькулятор', width=20)
+btn5 = Button(root, text='\n--В разработке--\n', width=20)
+btn6 = Button(root, text='НОД, НОК и \n'
+						'разложение \n'
+						'на простые числа', width=20)
 
 btn1.bind("<Button-1>", mid)
 btn2.bind("<Button-1>", sqr)

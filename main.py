@@ -22,7 +22,7 @@ def mid(event):
 		num_len = len(num_arr)
 
 		for i in range(num_len):
-			t = int(num_arr[i])
+			t = float(num_arr[i])
 			num_arrInt.append(t)
 
 		arr_sum = np.sum(num_arrInt)
@@ -47,8 +47,46 @@ def mid(event):
 	root.mainloop()
 
 
-def line_sqr(event):
-	print("--В разработке--")
+def tang(event):
+	root = Tk()
+	root.resizable(0, 0)
+
+	# Параметры окна
+	root.title("Вычисление тангенса")
+
+	def mid(event):
+		a = ent1.get()
+		b = ent2.get()
+		a = float(a)
+		b = float(b)
+
+		tang = a / b
+		tang = round(tang, 3)
+
+		lbl1['text'] = tang
+
+
+	lbl1 = Label(root, width=15, font=30)
+	form = Label(root, text='tang = a / b', font=20)
+	lbl2 = Label(root, font=30, text='Введите длины катетов:')
+	btn1 = Button(root, text='Вычислить', width=30, font=30)
+	lbl3 = Label(root, text='a = ', font=30, width=5)
+	ent1 = Entry(root, width=15, font=30)
+	lbl4 = Label(root, font=30, text='b = ', width=5)
+	ent2 = Entry(root, width=15, font=30)
+
+	form.grid(row=0, column=0)
+	lbl2.grid(row=1, column=0)
+	lbl3.grid(row=2, column=0)
+	ent1.grid(row=3, column=0)
+	lbl4.grid(row=4, column=0)
+	ent2.grid(row=5, column=0)
+	lbl1.grid(row=6, column=0)
+	btn1.grid(row=7, column=0)
+
+	btn1.bind("<Button-1>", mid)
+
+	root.mainloop()
 
 
 def gip(event):
@@ -73,16 +111,20 @@ def gip(event):
 
 
 	lbl1 = Label(root, width=15, font=30)
-	lbl2 = Label(root, font=30, text='Введите длину катетов:')
+	lbl2 = Label(root, font=30, text='Введите длины катетов:')
 	btn1 = Button(root, text='Вычислить', width=30, font=30)
+	lbl3 = Label(root, text='a = ', font=30, width=5)
 	ent1 = Entry(root, width=15, font=30)
+	lbl4 = Label(root, font=30, text='b = ', width=5)
 	ent2 = Entry(root, width=15, font=30)
 
 	lbl2.grid(row=0, column=0)
-	ent1.grid(row=1, column=0)
-	ent2.grid(row=2, column=0)
-	lbl1.grid(row=3, column=0)
-	btn1.grid(row=4, column=0)
+	lbl3.grid(row=1, column=0)
+	ent1.grid(row=2, column=0)
+	lbl4.grid(row=3, column=0)
+	ent2.grid(row=4, column=0)
+	lbl1.grid(row=5, column=0)
+	btn1.grid(row=6, column=0)
 
 	btn1.bind("<Button-1>", mid)
 
@@ -177,10 +219,10 @@ def calc(event):
 
 def sqr(event):
 	root = Tk()
-	root.resizable(0, 0)
 
 	# Параметры окна
 	root.title("Вычисление корня квадратного уравнения")
+	root.resizable(0, 0)
 
 	# Содержимое окна
 	def mid(event):
@@ -196,31 +238,47 @@ def sqr(event):
 		b = float(b)
 		c = float(c)
 
-		d = b * b - 4 * a * c
+		d = b ** 2 - 4 * a * c
 
 		if d > 0:
 			x1 = (-b + math.sqrt(d)) / (2 * a)
 			x2 = (-b - math.sqrt(d)) / (2 * a)
 
-		lbl1['text'] = x1
-		lbl2['text'] = x2
+			x1 = round(x1, 3)
+			x2 = round(x2, 3)
+
+			lbl1['text'] = x1
+			lbl2['text'] = x2
+		elif(d == 0):
+			x1 = -b / (2 * a)
+			lbl1['text'] = x1
+			lbl2['text'] = ''
+		else:
+			lbl1['text'] = 'Корней нет'
+			lbl2['text'] = ''
 
 
 	lbl1 = Label(root, width=15, font=30)
 	lbl2 = Label(root, width=15, font=30)
 	lbl3 = Label(root, width=20, font=30, text='Введите множители:')
 	btn1 = Button(root, text='Вычислить', width=15, font=30)
-	ent1 = Entry(root, width=15, font=30)
-	ent2 = Entry(root, width=15, font=30)
-	ent3 = Entry(root, width=15, font=30)
+	txt_a = Label(root, text='a = ', font=30)
+	txt_b = Label(root, text='b = ', font=30)
+	txt_c = Label(root, text='c = ', font=30)
+	ent1 = Entry(root, font=30)
+	ent2 = Entry(root, font=30)
+	ent3 = Entry(root, font=30)
 
 	lbl3.grid(row=0, column=0)
-	ent1.grid(row=1, column=0)
-	ent2.grid(row=2, column=0)
-	ent3.grid(row=3, column=0)
-	lbl1.grid(row=4, column=0)
-	lbl2.grid(row=5, column=0)
-	btn1.grid(row=6, column=0)
+	txt_a.grid(row=1, column=0)
+	ent1.grid(row=2, column=0)
+	txt_b.grid(row=3, column=0)
+	ent2.grid(row=4, column=0)
+	txt_c.grid(row=5, column=0)
+	ent3.grid(row=6, column=0)
+	lbl1.grid(row=7, column=0)
+	lbl2.grid(row=8, column=0)
+	btn1.grid(row=9, column=0)
 
 	btn1.bind("<Button-1>", mid)
 
@@ -347,13 +405,13 @@ lbl = Label(root, text='Slover',width=27 , font=30, fg='blue', bg='white')
 
 btn1 = Button(root, text='Среднее\n'
 						'арифмитическое', width=20, fg='blue', bg='white')
-btn2 = Button(root, text='Корень \nлинейного уравнения', width=20, fg='blue', bg='white')
+btn2 = Button(root, text='Корень \nквадратного уравнения', width=20, fg='blue', bg='white')
 
 btn3 = Button(root, text='Гипотенуза', width=20, fg='blue', bg='white')
 
 btn4 = Button(root, text='Калькулятор', width=20, fg='blue', bg='white')
 
-btn5 = Button(root, text='\n--В разработке--\n', width=20, fg='blue', bg='white')
+btn5 = Button(root, text='\nТангенс\n', width=20, fg='blue', bg='white')
 
 btn6 = Button(root, text='НОД, НОК и \n'
 						'разложение \n'
@@ -363,7 +421,7 @@ btn1.bind("<Button-1>", mid)
 btn2.bind("<Button-1>", sqr)
 btn3.bind("<Button-1>", gip)
 btn4.bind("<Button-1>", calc)
-btn5.bind("<Button-1>", line_sqr)
+btn5.bind("<Button-1>", tang)
 btn6.bind("<Button-1>", dk)
 
 lbl.grid(row=0, columnspan=2)

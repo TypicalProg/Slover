@@ -49,43 +49,41 @@ def gcd_lcm(a,b):
     l = m // g
     return g, l
  
-win = Tk()
-win.resizable(0, 0)
-
-win.iconbitmap('icon.ico')
-win.title('НОД, НОК и разложение на простые числа')
-lab_n1 = Label(text="Число 1")
+root1 = Tk()
+root.resizable(0, 0)
+root1.title('НОД, НОК и разложение на простые числа')
+lab_n1 = Label(root1, text="Число 1")
 lab_n1.grid(row=2,column=0)
  
-lab_n2 = Label(text="Число 2")
+lab_n2 = Label(root1, text="Число 2")
 lab_n2.grid(row=3,column=0)
  
-ent_n1 = Entry(width=10,bg="white")
+ent_n1 = Entry(root1, width=10,bg="white")
 ent_n1.grid(row=2,column=1)
  
-ent_n2 = Entry(width=10,bg="white")
+ent_n2 = Entry(root1, width=10,bg="white")
 ent_n2.grid(row=3,column=1)
  
-lab_prime = Label(text="Простые сомножители:")
+lab_prime = Label(root1, text="Простые сомножители:")
 lab_prime.grid(row=1,column=3,columnspan=2)
  
-lab_prime_n1 = Label(bg="white")
+lab_prime_n1 = Label(root1, bg="white")
 lab_prime_n1.grid(row=2,column=3,columnspan=2)
  
-lab_prime_n2 = Label(bg="white")
+lab_prime_n2 = Label(root1, bg="white")
 lab_prime_n2.grid(row=3,column=3,columnspan=2)
  
-lab_gcd_ = Label(text="НОД",bg="lightgreen",width=7)
+lab_gcd_ = Label(root1, text="НОД",bg="lightgreen",width=7)
 lab_gcd_.grid(row=4,column=3)
-lab_gcd = Label(bg="lightgreen",width=10)
+lab_gcd = Label(root1, bg="lightgreen",width=10)
 lab_gcd.grid(row=4,column=4)
  
-lab_lcm_ = Label(text="НОК",bg="lightblue",width=7)
+lab_lcm_ = Label(root1, text="НОК",bg="lightblue",width=7)
 lab_lcm_.grid(row=5,column=3)
-lab_lcm = Label(bg="lightblue",width=10)
+lab_lcm = Label(root1, bg="lightblue",width=10)
 lab_lcm.grid(row=5,column=4)
  
-but = Button(text="Вычислить",command=gcd,pady=10)
+but = Button(root1, text="Вычислить",command=gcd,pady=10)
 but.grid(row=4,column=0,rowspan=2,columnspan=2,sticky=W+N+S+E)
  
-win.mainloop()
+root1.mainloop()

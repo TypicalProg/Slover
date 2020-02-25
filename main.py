@@ -5,6 +5,9 @@ from tkinter import ttk
 import math
 import sys
 from decimal import *
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 # Функции
 def mid(event):
@@ -43,6 +46,7 @@ def mid(event):
 	btn1.grid(row=3, column=0)
 
 	btn1.bind("<Button-1>", mid)
+	# btn1.bind('<Return>', mid)
 
 	root.mainloop()
 
@@ -67,22 +71,20 @@ def tang(event):
 
 
 	lbl1 = Label(root, width=15, font=30)
-	form = Label(root, text='tang = a / b', font=20)
 	lbl2 = Label(root, font=30, text='Введите длины катетов:')
 	btn1 = Button(root, text='Вычислить', width=30, font=30)
-	lbl3 = Label(root, text='a = ', font=30, width=5)
+	lbl3 = Label(root, text='Противолежащий', font=30)
 	ent1 = Entry(root, width=15, font=30)
-	lbl4 = Label(root, font=30, text='b = ', width=5)
+	lbl4 = Label(root, font=30, text='Прилежащий')
 	ent2 = Entry(root, width=15, font=30)
 
-	form.grid(row=0, column=0)
-	lbl2.grid(row=1, column=0)
-	lbl3.grid(row=2, column=0)
-	ent1.grid(row=3, column=0)
-	lbl4.grid(row=4, column=0)
-	ent2.grid(row=5, column=0)
-	lbl1.grid(row=6, column=0)
-	btn1.grid(row=7, column=0)
+	lbl2.grid(row=0, column=0)
+	lbl3.grid(row=1, column=0)
+	ent1.grid(row=2, column=0)
+	lbl4.grid(row=3, column=0)
+	ent2.grid(row=4, column=0)
+	lbl1.grid(row=5, column=0)
+	btn1.grid(row=6, column=0)
 
 	btn1.bind("<Button-1>", mid)
 
@@ -141,9 +143,9 @@ def calc(event):
 	"7", "8", "9", "+", "*", 
 	"4", "5", "6", "-", "/",
 	"1", "2", "3",  "=", "xⁿ",
-	"0", ".", "±",  "C",
-	"Exit", "π", "sin", "cos",
-	"(", ")","n!","√2", ]
+	"0", ".", "±",  "(",
+	")", "π", "sin", "cos",
+	"n!", "√","C","Exit", ]
 
 	r = 1
 	c = 0
@@ -221,7 +223,7 @@ def sqr(event):
 	root = Tk()
 
 	# Параметры окна
-	root.title("Вычисление корня квадратного уравнения")
+	root.title("Вычисление корней квадратного уравнения")
 	root.resizable(0, 0)
 
 	# Содержимое окна
@@ -249,25 +251,33 @@ def sqr(event):
 
 			lbl1['text'] = x1
 			lbl2['text'] = x2
+
 		elif(d == 0):
 			x1 = -b / (2 * a)
+			x1 = round(x1, 3)
+
 			lbl1['text'] = x1
 			lbl2['text'] = ''
+			
 		else:
 			lbl1['text'] = 'Корней нет'
 			lbl2['text'] = ''
+			
 
 
+	btn1 = Button(root, text='Вычислить', width=15, font=30)
+
+	lbl3 = Label(root, width=20, font=30, text='Введите коэффициенты\nквадратного уравнения:')
 	lbl1 = Label(root, width=15, font=30)
 	lbl2 = Label(root, width=15, font=30)
-	lbl3 = Label(root, width=20, font=30, text='Введите множители:')
-	btn1 = Button(root, text='Вычислить', width=15, font=30)
-	txt_a = Label(root, text='a = ', font=30)
 	txt_b = Label(root, text='b = ', font=30)
 	txt_c = Label(root, text='c = ', font=30)
+	txt_a = Label(root, text='a = ', font=30)
+
 	ent1 = Entry(root, font=30)
 	ent2 = Entry(root, font=30)
 	ent3 = Entry(root, font=30)
+
 
 	lbl3.grid(row=0, column=0)
 	txt_a.grid(row=1, column=0)
@@ -381,9 +391,72 @@ def new_win():
 	root.resizable(0, 0)
 
 	lbl1 = Label(root, text='© Michurin Andrey 2020\n'
-		'По всем вопросам писать на\n M14ur1nAK@yandex.ru',
+		'Все вопросы задавать в разделе "Обратная связь"',
 		 fg='blue', bg='white')
 	lbl1.grid(row=0, column=0)
+
+	root.mainloop()
+
+
+def feedback():
+	root = Tk()
+	root.title("Обратная связь")
+	root.resizable(0, 0)
+
+	def send(event):
+		def send_mail():
+		    # Логин
+		    login = "M14software@yandex.ru"
+		    # Пароль
+		    password = "M14software_"
+		    # Сервер
+		    url = "smtp.yandex.ru"
+		    # Кому
+		    toaddr = "M14software@yandex.ru"
+
+		    msg = MIMEMultipart()
+		    # Тема
+		    theme = tema_ent.get()
+		    msg['Subject'] = '-=Feedback from Slover=-    ' + theme
+		    # От кого
+		    msg['From'] = login
+		    # Текст письма
+		    leter = txt_ent.get(1.0, END)
+		    body = leter
+		    msg.attach(MIMEText(body, 'plain'))
+
+		    try:
+		        server = smtplib.SMTP_SSL(url, 465)
+		    except TimeoutError:
+		        print('No connect')
+		    server.login(login, password)
+		    server.sendmail(login, toaddr, msg.as_string())
+
+		    messagebox.showinfo("Успешно!", "Письмо отправлено! \nСпасибо за отзывчивость!")
+
+
+		def main():
+		    send_mail()
+
+		if __name__ == "__main__":
+		    main()
+
+
+	lbl1 = Label(root, text='Обратная связь', font='12')
+	tema = Label(root, text='Тема', font='11')
+	tema_ent = Entry(root, font='11')
+	text = Label(root, text='Текст сообщения', font='11')
+	txt_ent = Text(root, width=15, height=5, font=12)
+	send_btn = Button(root, text='Отправить', font='10')
+
+	lbl1.grid(row=0, columnspan=2)
+	tema.grid(row=1, columnspan=2)
+	tema_ent.grid(row=2, columnspan=2)
+	text.grid(row=3, columnspan=2)
+	txt_ent.grid(row=4, columnspan=2)
+	send_btn.grid(row=5, columnspan=2)
+
+	send_btn.bind("<Button-1>", send)
 
 	root.mainloop()
 
@@ -397,15 +470,16 @@ main_menu = Menu(root)
 root.configure(menu=main_menu)
 
 first_item = Menu(main_menu, tearoff=0)
-main_menu.add_cascade(label="Инфо", menu=first_item)
+main_menu.add_cascade(label="Помощь", menu=first_item)
 first_item.add_command(label="О программе", command=new_win)
+first_item.add_command(label="Обратная связь", command=feedback)
 
 
 lbl = Label(root, text='Slover',width=27 , font=30, fg='blue', bg='white')
 
 btn1 = Button(root, text='Среднее\n'
 						'арифмитическое', width=20, fg='blue', bg='white')
-btn2 = Button(root, text='Корень \nквадратного уравнения', width=20, fg='blue', bg='white')
+btn2 = Button(root, text='Корни \nквадратного уравнения', width=20, fg='blue', bg='white')
 
 btn3 = Button(root, text='Гипотенуза', width=20, fg='blue', bg='white')
 

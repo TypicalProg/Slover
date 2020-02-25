@@ -5,15 +5,17 @@ import math
 import sys
 
 root = Tk() 
-root.title("Calculator")
+root.title("Калькулятор")
+root.resizable(0, 0)
+
 
 bttn_list = [
 "7", "8", "9", "+", "*", 
 "4", "5", "6", "-", "/",
 "1", "2", "3",  "=", "xⁿ",
-"0", ".", "±",  "C",
-"Exit", "π", "sin", "cos",
-"(", ")","n!","√2", ]
+"0", ".", "±",  "(",
+")", "π", "sin", "cos",
+"n!", "√","C","Exit", ]
 
 r = 1
 c = 0

@@ -4,7 +4,6 @@ import numpy as np
 root = Tk()
 
 # Параметры окна
-root.iconbitmap('icon.ico')
 root.title("Вычисление среднего арифметического значения")
 root.resizable(0, 0)
 
@@ -16,7 +15,7 @@ def mid(event):
 	num_len = len(num_arr)
 
 	for i in range(num_len):
-		t = int(num_arr[i])
+		t = float(num_arr[i])
 		num_arrInt.append(t)
 
 	arr_sum = np.sum(num_arrInt)
@@ -27,13 +26,16 @@ def mid(event):
 
 
 lbl1 = Label(root, width=30, font=30)
+lbl2 = Label(root, text='Введите числа через пробел:', width=30, font=30)
 btn1 = Button(root, text='Вычислить', width=30, font=30)
 ent1 = Entry(root, width=30, font=30)
 
-ent1.grid(row=0, column=0)
-lbl1.grid(row=1, column=0)
-btn1.grid(row=2, column=0)
+lbl2.grid(row=0, column=0)
+ent1.grid(row=1, column=0)
+lbl1.grid(row=2, column=0)
+btn1.grid(row=3, column=0)
 
 btn1.bind("<Button-1>", mid)
+# btn1.bind('<Return>', mid)
 
 root.mainloop()

@@ -1,2 +1,2 @@
-# project_npk2020
-# using package : math, tkinter, numpy, sys, decimal
+# Slover v1.0 BETA
+# using package : math, tkinter, numpy, sys, decimal, smtplib, email

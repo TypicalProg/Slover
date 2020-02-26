@@ -32,7 +32,7 @@ def mid(event):
 		middle = arr_sum / num_len
 		middle = round(middle, 2)
 
-		lbl1['text'] = middle
+		lbl1['text'] = 'Ср. арифм. = ' + str(middle)
 
 
 	lbl1 = Label(root, width=30, font=30)
@@ -67,7 +67,7 @@ def tang(event):
 		tang = a / b
 		tang = round(tang, 3)
 
-		lbl1['text'] = tang
+		lbl1['text'] = 'Тангенс = ' + str(tang)
 
 
 	lbl1 = Label(root, width=15, font=30)
@@ -109,7 +109,7 @@ def gip(event):
 		fact = math.sqrt(sum1)
 		fact = round(fact, 2)
 
-		lbl1['text'] = fact
+		lbl1['text'] = 'Гипотенуза = ' + str(fact)
 
 
 	lbl1 = Label(root, width=15, font=30)
@@ -249,14 +249,14 @@ def sqr(event):
 			x1 = round(x1, 3)
 			x2 = round(x2, 3)
 
-			lbl1['text'] = x1
-			lbl2['text'] = x2
+			lbl1['text'] = 'x1 = ' + str(x1)
+			lbl2['text'] = 'x2 = ' + str(x2)
 
 		elif(d == 0):
 			x1 = -b / (2 * a)
 			x1 = round(x1, 3)
 
-			lbl1['text'] = x1
+			lbl1['text'] = 'x1 = ' + str(x1)
 			lbl2['text'] = ''
 			
 		else:

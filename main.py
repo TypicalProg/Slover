@@ -46,7 +46,6 @@ def mid(event):
 	btn1.grid(row=3, column=0)
 
 	btn1.bind("<Button-1>", mid)
-	# btn1.bind('<Return>', mid)
 
 	root.mainloop()
 
@@ -256,7 +255,7 @@ def sqr(event):
 			x1 = -b / (2 * a)
 			x1 = round(x1, 3)
 
-			lbl1['text'] = 'x1 = ' + str(x1)
+			lbl1['text'] = 'x = ' + str(x1)
 			lbl2['text'] = ''
 			
 		else:

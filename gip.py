@@ -18,7 +18,7 @@ def mid(event):
 	fact = math.sqrt(sum1)
 	fact = round(fact, 2)
 
-	lbl1['text'] = fact
+	lbl1['text'] = 'Гипотенуза = ' + str(fact)
 
 
 lbl1 = Label(root, width=15, font=30)

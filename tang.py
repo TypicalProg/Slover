@@ -15,7 +15,7 @@ def mid(event):
 	tang = a / b
 	tang = round(tang, 3)
 
-	lbl1['text'] = tang
+	lbl1['text'] = 'Тангенс = ' + str(tang)
 
 
 lbl1 = Label(root, width=15, font=30)

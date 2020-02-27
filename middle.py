@@ -22,7 +22,7 @@ def mid(event):
 	middle = arr_sum / num_len
 	middle = round(middle, 2)
 
-	lbl1['text'] = middle
+	lbl1['text'] = 'Ср. арифм. = ' + str(middle)
 
 
 lbl1 = Label(root, width=30, font=30)
@@ -36,6 +36,5 @@ lbl1.grid(row=2, column=0)
 btn1.grid(row=3, column=0)
 
 btn1.bind("<Button-1>", mid)
-# btn1.bind('<Return>', mid)
 
 root.mainloop()

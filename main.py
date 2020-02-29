@@ -405,13 +405,13 @@ def feedback():
 	def send(event):
 		def send_mail():
 		    # Логин
-		    login = "M14software@yandex.ru"
+		    login = " "
 		    # Пароль
-		    password = "M14software_"
+		    password = " "
 		    # Сервер
 		    url = "smtp.yandex.ru"
 		    # Кому
-		    toaddr = "M14software@yandex.ru"
+		    toaddr = " "
 
 		    msg = MIMEMultipart()
 		    # Тема

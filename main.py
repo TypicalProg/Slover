@@ -390,7 +390,7 @@ def new_win():
 	root.resizable(0, 0)
 
 	lbl1 = Label(root, text=
-"""© Michurin Andrey 2020\n'
+"""© Michurin Andrey 2020\n
 Все вопросы задавать в разделе "Обратная связь\"
 Для корректной работы функции "Обратная связь\"\nнеобходимо подключение к интернету""",
 		 fg='blue', bg='white')

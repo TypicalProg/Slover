@@ -389,8 +389,10 @@ def new_win():
 	root.title("О программе")
 	root.resizable(0, 0)
 
-	lbl1 = Label(root, text='© Michurin Andrey 2020\n'
-		'Все вопросы задавать в разделе "Обратная связь"',
+	lbl1 = Label(root, text=
+"""© Michurin Andrey 2020\n'
+Все вопросы задавать в разделе "Обратная связь\"
+Для корректной работы функции "Обратная связь\"\nнеобходимо подключение к интернету""",
 		 fg='blue', bg='white')
 	lbl1.grid(row=0, column=0)
 
@@ -405,13 +407,13 @@ def feedback():
 	def send(event):
 		def send_mail():
 		    # Логин
-		    login = " "
+		    login = "M14software@yandex.ru"
 		    # Пароль
-		    password = " "
+		    password = "M14ur1nAK"
 		    # Сервер
 		    url = "smtp.yandex.ru"
 		    # Кому
-		    toaddr = " "
+		    toaddr = "M14software@yandex.ru"
 
 		    msg = MIMEMultipart()
 		    # Тема
@@ -426,8 +428,16 @@ def feedback():
 
 		    try:
 		        server = smtplib.SMTP_SSL(url, 465)
-		    except TimeoutError:
-		        print('No connect')
+		    except:
+		        messagebox.showinfo("Ошибка!", 
+"""Произошла непредвиденная ошибка!
+Повторите попытку позже!
+
+###############
+Возможные варианты решения проблемы:
+>Проверьте подключение к интернету
+>Если ничего из вышеперечисленного не помогает, 
+напишите нам через форму обратной связи""")
 		    server.login(login, password)
 		    server.sendmail(login, toaddr, msg.as_string())
 
